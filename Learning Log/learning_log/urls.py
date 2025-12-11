@@ -1,3 +1,4 @@
+
 """
 URL configuration for learning_log project.
 
@@ -16,11 +17,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+#from django.contrib.auth.views import LogoutView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
+    path("users/", include("django.contrib.auth.urls")),  # login, logout, password reset
     path('', include('learning_logs.urls')),
     
     #learnt from Rathank

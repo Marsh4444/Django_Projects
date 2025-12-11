@@ -1,12 +1,32 @@
-<p>
-    <a href="{% url 'learning_logs:home' %}">Learning Log</a> -
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learning Log</title>
+</head>
+<body>
 
-    <a href="{% url 'learning_logs:topics' %}">Topics</a> - 
+<nav>
+    <a href="{% url 'learning_logs:home' %}">Home</a> |
+    <a href="{% url 'learning_logs:topics' %}">Topics</a>|
+
     {% if user.is_authenticated %}
-     Hello, {{ user.username }}.
-    {% else %}
-     <a href="{% url 'users:login' %}">Log in</a>
-    {% endif %}
+        <p>Welcome, {{ user.username }}!</p>
 
-</p>
-{% block content %}{% endblock content %}
+        <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">Log Out</button>
+        </form>
+
+    {% else %}
+        <a href="{% url 'login' %}">Log In</a>
+    {% endif %}
+</nav>
+
+<hr>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
